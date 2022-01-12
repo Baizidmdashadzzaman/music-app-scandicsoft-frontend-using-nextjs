@@ -1,6 +1,8 @@
-import React from 'react'
+import React ,{ useEffect } from 'react'
 import Link from 'next/link'
+import Playlist from '../../lib/Playlist'
 export default function Layout({children}) {
+
   return (
     <div >
       <div>
@@ -14,10 +16,14 @@ export default function Layout({children}) {
       <div className="ms_sidemenu_inner">
         <div className="ms_logo_inner">
           <div className="ms_logo">
-            <a href="index-2.html"><img src="images/logo.png" alt className="img-fluid" /></a>
+            <Link href="/">
+              <a><img src="images/logo.png" alt className="img-fluid" /></a>
+            </Link>
           </div>
           <div className="ms_logo_open">
-            <a href="index-2.html"><img src="images/open_logo.png" alt className="img-fluid" /></a>
+            <Link href="/">
+              <a><img src="images/open_logo.png" alt className="img-fluid" /></a>
+            </Link>
           </div>
         </div>
         <div className="ms_nav_wrapper">
