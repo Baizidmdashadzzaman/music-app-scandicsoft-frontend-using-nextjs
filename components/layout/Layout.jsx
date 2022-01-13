@@ -1,6 +1,5 @@
 import React ,{ useEffect } from 'react'
 import Link from 'next/link'
-import Playlist from '../../lib/Playlist'
 export default function Layout({children}) {
 
   return (
@@ -17,66 +16,79 @@ export default function Layout({children}) {
         <div className="ms_logo_inner">
           <div className="ms_logo">
             <Link href="/">
-              <a><img src="images/logo.png" alt className="img-fluid" /></a>
+              <a><img src="/images/logo.png" alt className="img-fluid" /></a>
             </Link>
           </div>
           <div className="ms_logo_open">
             <Link href="/">
-              <a><img src="images/open_logo.png" alt className="img-fluid" /></a>
+              <a><img src="/images/open_logo.png" alt className="img-fluid" /></a>
             </Link>
           </div>
         </div>
         <div className="ms_nav_wrapper">
           <ul>
-            <li><Link href="/" className="active" title="Discover">
+            <li>
+              <Link href="/" className="active" title="Discover">
                 <a>
                 <span className="nav_icon">
                   <span className="icon icon_discover" />
                 </span>
                 <span className="nav_text">
-                  discover
+                  Home
                 </span>
                 </a>
               </Link>
             </li>
-            <li><Link href="/about" title="Albums">
+            <li>
+              <Link href="/category" title="Albums">
               <a>
                 <span className="nav_icon">
                   <span className="icon icon_albums" />
                 </span>
                 <span className="nav_text">
-                  albums
+                  Categories
                 </span>
               </a>
               </Link>
             </li>
-            <li><a href="artist.html" title="Artists">
+            <li>
+            <Link href="/album" title="Albums">
+              <a title="Albums">
                 <span className="nav_icon">
                   <span className="icon icon_artists" />
                 </span>
                 <span className="nav_text">
-                  artists
+                  Albums
                 </span>
               </a>
+            </Link>  
             </li>
-            <li><a href="genres.html" title="Genres">
-                <span className="nav_icon">
-                  <span className="icon icon_genres" />
-                </span>
-                <span className="nav_text">
-                  genres
-                </span>
-              </a>
-            </li>
-            <li><a href="top_track.html" title="Top Tracks">
+            <li>
+             <Link href="/artist" title="Artist">
+              <a title="Artist">
                 <span className="nav_icon">
                   <span className="icon icon_tracks" />
                 </span>
                 <span className="nav_text">
-                  top tracks
+                  Artist
                 </span>
               </a>
+             </Link>
             </li>
+            <li>
+            <Link href="/songs" title="Songs">
+              <a title="Songs">
+                <span className="nav_icon">
+                  <span className="icon icon_genres" />
+                </span>
+                <span className="nav_text">
+                  Songs
+                </span>
+              </a>
+            </Link>  
+            </li>
+            
+            {/* 
             <li><a href="free_music.html" title="Free Music">
                 <span className="nav_icon">
                   <span className="icon icon_music" />
@@ -94,47 +106,58 @@ export default function Layout({children}) {
                   stations
                 </span>
               </a>
-            </li>
+            </li> */}
+
           </ul>
           <ul className="nav_downloads">
-            <li><a href="download.html" title="Downloads">
+            <li>
+              <Link href="/about" title="Aboutus">
+              <a title="Aboutus">
                 <span className="nav_icon">
                   <span className="icon icon_download" />
                 </span>
                 <span className="nav_text">
-                  downloads
+                  Aboutus
                 </span>
               </a>
+              </Link>
             </li>
-            <li><a href="purchase.html" title="Purchased">
+            <li>
+             <Link href="/contactus" title="Contact us">
+              <a title="Contact us">
                 <span className="nav_icon">
                   <span className="icon icon_purchased" />
                 </span>
                 <span className="nav_text">
-                  purchased
+                  Contact us
                 </span>
               </a>
+             </Link> 
             </li>
-            <li><a href="favourite.html" title="Favourites">
+            <li>
+             <Link href="/faq" title="Faq">
+              <a  title="Faq">
                 <span className="nav_icon">
                   <span className="icon icon_favourite" />
                 </span>
                 <span className="nav_text">
-                  favourites
+                  Faq
                 </span>
               </a>
+              </Link>
             </li>
             <li><a href="history.html" title="History">
                 <span className="nav_icon">
                   <span className="icon icon_history" />
                 </span>
                 <span className="nav_text">
-                  history
+                  Privacry&policy
                 </span>
               </a>
             </li>
           </ul>
-          <ul className="nav_playlist">
+          
+          {/* <ul className="nav_playlist">
             <li><a href="feature_playlist.html" title="Featured Playlist">
                 <span className="nav_icon">
                   <span className="icon icon_fe_playlist" />
@@ -153,7 +176,8 @@ export default function Layout({children}) {
                 </span>
               </a>
             </li>
-          </ul>
+          </ul> */}
+          
         </div>
       </div>
     </div>
@@ -166,20 +190,22 @@ export default function Layout({children}) {
           <div className="ms_top_search">
             <input type="text" className="form-control" placeholder="Search Music Here.." />
             <span className="search_icon">
-              <img src="images/svg/search.svg" alt />
+              <img src="/images/svg/search.svg" alt />
             </span>
           </div>
           <div className="ms_top_trend">
-            <span><a href="#" className="ms_color">Trending Songs :</a></span> <span className="top_marquee"><a href="#">Dream your moments, Until I Met You, Gimme Some Courage, Dark Alley (+8 More)</a></span>
+            <span><a href="#" className="ms_color">Trending Songs :
+            </a></span> <span className="top_marquee"><a href="#">
+              Dream your moments, Until I Met You, Gimme Some Courage, Dark Alley (+8 More)</a></span>
           </div>
         </div>
         <div className="ms_top_right">
           <div className="ms_top_lang">
-            <span data-toggle="modal" data-target="#lang_modal">languages <img src="images/svg/lang.svg" alt /></span>
+            <span data-toggle="modal" data-target="#lang_modal">languages <img src="/images/svg/lang.svg" alt /></span>
           </div>
           <div className="ms_top_btn">
-            <a href="javascript:;" className="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
-            <a href="javascript:;" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>
+            <a href="javascript:void(0)" className="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
+            <a href="javascript:void(0)" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>
           </div>
         </div>
       </div>
@@ -192,7 +218,7 @@ export default function Layout({children}) {
     {/*--Footer Start--*/}
     <div className="ms_footer_wrapper">
       <div className="ms_footer_logo">
-        <a href="index-2.html"><img src="images/open_logo.png" alt /></a>
+        <a href="index-2.html"><img src="/images/open_logo.png" alt /></a>
       </div>
       <div className="ms_footer_inner">
         <div className="row">
@@ -206,9 +232,9 @@ export default function Layout({children}) {
             <div className="footer_box footer_app">
               <h1 className="footer_title">Download our App</h1>
               <p>Go Mobile with our app.<br /> Listen to your favourite songs at just one click. Download Now !</p>
-              <a href="#" className="foo_app_btn"><img src="images/google_play.jpg" alt className="img-fluid" /></a>
-              <a href="#" className="foo_app_btn"><img src="images/app_store.jpg" alt className="img-fluid" /></a>
-              <a href="#" className="foo_app_btn"><img src="images/windows.jpg" alt className="img-fluid" /></a>
+              <a href="#" className="foo_app_btn"><img src="/images/google_play.jpg" alt className="img-fluid" /></a>
+              <a href="#" className="foo_app_btn"><img src="/images/app_store.jpg" alt className="img-fluid" /></a>
+              <a href="#" className="foo_app_btn"><img src="/images/windows.jpg" alt className="img-fluid" /></a>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
@@ -234,7 +260,7 @@ export default function Layout({children}) {
               <ul className="foo_con_info">
                 <li>
                   <div className="foo_con_icon">
-                    <img src="images/svg/phone.svg" alt />
+                    <img src="/images/svg/phone.svg" alt />
                   </div>
                   <div className="foo_con_data">
                     <span className="con-title">Call us :</span>
@@ -243,7 +269,7 @@ export default function Layout({children}) {
                 </li>
                 <li>
                   <div className="foo_con_icon">
-                    <img src="images/svg/message.svg" alt />
+                    <img src="/images/svg/message.svg" alt />
                   </div>
                   <div className="foo_con_data">
                     <span className="con-title">email us :</span>
@@ -252,7 +278,7 @@ export default function Layout({children}) {
                 </li>
                 <li>
                   <div className="foo_con_icon">
-                    <img src="images/svg/add.svg" alt />
+                    <img src="/images/svg/add.svg" alt />
                   </div>
                   <div className="foo_con_data">
                     <span className="con-title">walk in :</span>
@@ -277,7 +303,11 @@ export default function Layout({children}) {
       <div className="col-lg-12">
         <div className="ms_copyright">
           <div className="footer_border" />
-          <p>Copyright © 2018 <a href="#">The Miraculous Music Template</a>. All Rights Reserved.</p>
+          <p>Copyright © 2018 <a href="#">Musicapp</a>. Developed by &nbsp;&nbsp;
+          <a href='https://www.softscandic.com/' target="_blank">
+            <img src="/images/logoscandic.png" style={{width:'120px'}}/>
+            </a>
+          </p>
         </div>
       </div>
     </div>
@@ -323,7 +353,7 @@ export default function Layout({children}) {
                   </ul>
                 </div>
                 <div className="jp_queue_btn">
-                  <a href="javascript:;" className="ms_clear" data-toggle="modal" data-target="#clear_modal">clear</a>
+                  <a href="javascript:void(0)" className="ms_clear" data-toggle="modal" data-target="#clear_modal">clear</a>
                   <a href="clear_modal.html" className="ms_save" data-toggle="modal" data-target="#save_modal">save</a>
                 </div>
               </div>
@@ -363,7 +393,7 @@ export default function Layout({children}) {
                           <div className="knob d3"><span /></div>
                           <div className="handle" />
                           <div className="round">
-                            <img src="images/svg/volume.svg" alt />
+                            <img src="/images/svg/volume.svg" alt />
                           </div>
                         </div>
                       </div>
@@ -405,7 +435,7 @@ export default function Layout({children}) {
           </button>
           <div className="modal-body">
             <div className="ms_register_img">
-              <img src="images/register_img.png" alt className="img-fluid" />
+              <img src="/images/register_img.png" alt className="img-fluid" />
             </div>
             <div className="ms_register_form">
               <h2>Register / Sign Up</h2>
@@ -450,7 +480,7 @@ export default function Layout({children}) {
           </button>
           <div className="modal-body">
             <div className="ms_register_img">
-              <img src="images/register_img.png" alt className="img-fluid" />
+              <img src="/images/register_img.png" alt className="img-fluid" />
             </div>
             <div className="ms_register_form">
               <h2>login / Sign in</h2>
@@ -622,7 +652,7 @@ export default function Layout({children}) {
             </div>
             <div className="ms_dnt_have">
               <span>Dont't have an account ?</span>
-              <a href="javascript:;" className="hideCurrentModel" data-toggle="modal" data-target="#myModal">Register Now</a>
+              <a href="javascript:void(0)" className="hideCurrentModel" data-toggle="modal" data-target="#myModal">Register Now</a>
             </div>
           </div>
         </div>
