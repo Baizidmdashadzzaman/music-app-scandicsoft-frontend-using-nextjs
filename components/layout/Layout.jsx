@@ -1,5 +1,15 @@
 import React ,{ useEffect } from 'react'
 import Link from 'next/link'
+import 
+{ 
+  faBook,
+  faComment,
+  faHeadphones,
+  faHome , faInfoCircle, faList, faMusic, faQuestion, faVolumeUp
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQq } from '@fortawesome/free-brands-svg-icons'
+import Subscribe from './subscribe'
 export default function Layout({children}) {
 
   return (
@@ -31,7 +41,7 @@ export default function Layout({children}) {
               <Link href="/" className="active" title="Discover">
                 <a>
                 <span className="nav_icon">
-                  <span className="icon icon_discover" />
+                  <FontAwesomeIcon icon={faHome} size="lg" />
                 </span>
                 <span className="nav_text">
                   Home
@@ -43,7 +53,7 @@ export default function Layout({children}) {
               <Link href="/category" title="Albums">
               <a>
                 <span className="nav_icon">
-                  <span className="icon icon_albums" />
+                <FontAwesomeIcon icon={faList} size="lg" />
                 </span>
                 <span className="nav_text">
                   Categories
@@ -55,7 +65,7 @@ export default function Layout({children}) {
             <Link href="/album" title="Albums">
               <a title="Albums">
                 <span className="nav_icon">
-                  <span className="icon icon_artists" />
+                   <FontAwesomeIcon icon={faHeadphones} size="lg" />
                 </span>
                 <span className="nav_text">
                   Albums
@@ -67,7 +77,7 @@ export default function Layout({children}) {
              <Link href="/artist" title="Artist">
               <a title="Artist">
                 <span className="nav_icon">
-                  <span className="icon icon_tracks" />
+                  <FontAwesomeIcon icon={faVolumeUp} size="lg" />
                 </span>
                 <span className="nav_text">
                   Artist
@@ -79,7 +89,7 @@ export default function Layout({children}) {
             <Link href="/songs" title="Songs">
               <a title="Songs">
                 <span className="nav_icon">
-                  <span className="icon icon_genres" />
+                  <FontAwesomeIcon icon={faMusic} size="lg" />
                 </span>
                 <span className="nav_text">
                   Songs
@@ -88,33 +98,13 @@ export default function Layout({children}) {
             </Link>  
             </li>
             
-            {/* 
-            <li><a href="free_music.html" title="Free Music">
-                <span className="nav_icon">
-                  <span className="icon icon_music" />
-                </span>
-                <span className="nav_text">
-                  free music
-                </span>
-              </a>
-            </li>
-            <li><a href="stations.html" title="Stations">
-                <span className="nav_icon">
-                  <span className="icon icon_station" />
-                </span>
-                <span className="nav_text">
-                  stations
-                </span>
-              </a>
-            </li> */}
-
           </ul>
           <ul className="nav_downloads">
             <li>
               <Link href="/about" title="Aboutus">
               <a title="Aboutus">
                 <span className="nav_icon">
-                  <span className="icon icon_download" />
+                  <FontAwesomeIcon icon={faInfoCircle} size="lg" />
                 </span>
                 <span className="nav_text">
                   Aboutus
@@ -126,7 +116,7 @@ export default function Layout({children}) {
              <Link href="/contactus" title="Contact us">
               <a title="Contact us">
                 <span className="nav_icon">
-                  <span className="icon icon_purchased" />
+                  <FontAwesomeIcon icon={faComment} size="lg" />
                 </span>
                 <span className="nav_text">
                   Contact us
@@ -138,7 +128,7 @@ export default function Layout({children}) {
              <Link href="/faq" title="Faq">
               <a  title="Faq">
                 <span className="nav_icon">
-                  <span className="icon icon_favourite" />
+                   <FontAwesomeIcon icon={faQuestion} size="lg" />
                 </span>
                 <span className="nav_text">
                   Faq
@@ -146,37 +136,20 @@ export default function Layout({children}) {
               </a>
               </Link>
             </li>
-            <li><a href="history.html" title="History">
+            <li>
+              <Link href="/privacyandpolicy" title="Privacry & policy">
+               <a title="Privacry & policy">
                 <span className="nav_icon">
-                  <span className="icon icon_history" />
+                  <FontAwesomeIcon icon={faBook} size="lg" />
                 </span>
                 <span className="nav_text">
                   Privacry&policy
                 </span>
-              </a>
+                </a>
+              </Link>
             </li>
           </ul>
           
-          {/* <ul className="nav_playlist">
-            <li><a href="feature_playlist.html" title="Featured Playlist">
-                <span className="nav_icon">
-                  <span className="icon icon_fe_playlist" />
-                </span>
-                <span className="nav_text">
-                  featured playlist
-                </span>
-              </a>
-            </li>
-            <li><a href="add_playlist.html" title="Create Playlist">
-                <span className="nav_icon">
-                  <span className="icon icon_c_playlist" />
-                </span>
-                <span className="nav_text">
-                  create playlist
-                </span>
-              </a>
-            </li>
-          </ul> */}
           
         </div>
       </div>
@@ -237,23 +210,9 @@ export default function Layout({children}) {
               <a href="#" className="foo_app_btn"><img src="/images/windows.jpg" alt className="img-fluid" /></a>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6">
-            <div className="footer_box footer_subscribe">
-              <h1 className="footer_title">subscribe</h1>
-              <p>Subscribe to our newsletter and get latest updates and offers.</p>
-              <form>
-                <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Enter Your Name" />
-                </div>
-                <div className="form-group">
-                  <input type="text" className="form-control" placeholder="Enter Your Email" />
-                </div>
-                <div className="form-group">
-                  <a href="#" className="ms_btn">sign me up</a>
-                </div>
-              </form>
-            </div>
-          </div>
+          
+             <Subscribe/>
+          
           <div className="col-lg-3 col-md-6">
             <div className="footer_box footer_contacts">
               <h1 className="footer_title">contact us</h1>

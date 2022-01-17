@@ -1,3 +1,16 @@
 body {
     font-family: 'Montserrat';
 }
+.ms_pro_form .ms_btn {
+    height: 40px;
+    width: 140px;
+    line-height: 3px;
+    margin-left: 15px;
+}
+.footer_box.footer_subscribe .ms_btn {
+    height: 40px;
+    line-height: 3px;
+    width: auto;
+    padding: 0px 22px;
+    margin-left: 0px;
+  }
