@@ -14,3 +14,13 @@ body {
     padding: 0px 22px;
     margin-left: 0px;
   }
+
+  .textviewashtm{
+     border: medium none;
+     overflow: hidden;
+     width: 100%; 
+     resize: none; 
+     line-height: 1.9; 
+     height: 100%;
+     font-size: 15px;
+  }

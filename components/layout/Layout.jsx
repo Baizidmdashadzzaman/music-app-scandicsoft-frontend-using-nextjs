@@ -1,17 +1,13 @@
-import React ,{ useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import 
-{ 
-  faBook,
-  faComment,
-  faHeadphones,
-  faHome , faInfoCircle, faList, faMusic, faQuestion, faVolumeUp
+{ faBook,faComment,faHeadphones,faHome,faInfoCircle,faList,faMusic,faQuestion,faVolumeUp
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQq } from '@fortawesome/free-brands-svg-icons'
 import Subscribe from './subscribe'
-export default function Layout({children}) {
 
+export default function Layout({children , siteinfo}) {
+ 
   return (
     <div >
       <div>
@@ -26,12 +22,18 @@ export default function Layout({children}) {
         <div className="ms_logo_inner">
           <div className="ms_logo">
             <Link href="/">
-              <a><img src="/images/logo.png" alt className="img-fluid" /></a>
+              <a>
+               <img src={ "http://127.0.0.1:8000/settingfolder/" + siteinfo.site_logo_second } 
+                className="img-fluid" style={{width:'50px'}} />
+              </a>
             </Link>
           </div>
           <div className="ms_logo_open">
             <Link href="/">
-              <a><img src="/images/open_logo.png" alt className="img-fluid" /></a>
+              <a>
+                <img src={ "http://127.0.0.1:8000/settingfolder/" + siteinfo.site_logo_first } 
+                className="img-fluid" style={{width:'150px'}} />
+              </a>
             </Link>
           </div>
         </div>
@@ -184,21 +186,30 @@ export default function Layout({children}) {
       </div>
 
 
-      {children}
+      {children }
 
       {/*--Main div close--*/}
     </div>
     {/*--Footer Start--*/}
     <div className="ms_footer_wrapper">
       <div className="ms_footer_logo">
-        <a href="index-2.html"><img src="/images/open_logo.png" alt /></a>
+        <Link href="/" >
+          <a>
+            <img src={ "http://127.0.0.1:8000/settingfolder/" + siteinfo.site_logo_first } 
+                className="img-fluid" style={{width:'150px'}} />
+          </a>
+        </Link>
+        
       </div>
       <div className="ms_footer_inner">
         <div className="row">
           <div className="col-lg-3 col-md-6">
             <div className="footer_box">
-              <h1 className="footer_title">miraculous music station</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor.</p>
+              <h1 className="footer_title">{siteinfo.site_name}</h1>
+              <p>
+                { siteinfo.site_description == null ? ( siteinfo.site_description ) : ( siteinfo.site_description.length < 250 ? ( siteinfo.site_description ) : ( siteinfo.site_description.substring(0, 250) + '...' ) ) }
+                <Link href="/about"><a>Read more</a></Link>
+              </p>
             </div>
           </div>
           <div className="col-lg-3 col-md-6">
@@ -223,7 +234,7 @@ export default function Layout({children}) {
                   </div>
                   <div className="foo_con_data">
                     <span className="con-title">Call us :</span>
-                    <span>(+1) 202-555-0176, (+1) 2025-5501</span>
+                    <span>{siteinfo.site_phone}</span>
                   </div>
                 </li>
                 <li>
@@ -232,7 +243,7 @@ export default function Layout({children}) {
                   </div>
                   <div className="foo_con_data">
                     <span className="con-title">email us :</span>
-                    <span><a href="#">demo@mail.com </a>, <a href="#">dummy@mail.com</a></span>
+                    <span><a href="#">{siteinfo.site_email}</a></span>
                   </div>
                 </li>
                 <li>
@@ -240,8 +251,8 @@ export default function Layout({children}) {
                     <img src="/images/svg/add.svg" alt />
                   </div>
                   <div className="foo_con_data">
-                    <span className="con-title">walk in :</span>
-                    <span>598 Old House Drive, London</span>
+                    <span className="con-title">Address :</span>
+                    <span>{siteinfo.site_address}</span>
                   </div>
                 </li>
               </ul>
@@ -251,7 +262,7 @@ export default function Layout({children}) {
                   <li><a href="#"><i className="fa fa-facebook" aria-hidden="true" /></a></li>
                   <li><a href="#"><i className="fa fa-linkedin" aria-hidden="true" /></a></li>
                   <li><a href="#"><i className="fa fa-twitter" aria-hidden="true" /></a></li>
-                  <li><a href="#"><i className="fa fa-google-plus" aria-hidden="true" /></a></li>
+                  <li><a href="#"><i className="fa fa-youtube" aria-hidden="true" /></a></li>
                 </ul>
               </div>
             </div>
@@ -262,7 +273,7 @@ export default function Layout({children}) {
       <div className="col-lg-12">
         <div className="ms_copyright">
           <div className="footer_border" />
-          <p>Copyright © 2018 <a href="#">Musicapp</a>. Developed by &nbsp;&nbsp;
+          <p>Copyright © 2018 <a href="#">{siteinfo.site_name}</a>. Developed by &nbsp;&nbsp;
           <a href='https://www.softscandic.com/' target="_blank">
             <img src="/images/logoscandic.png" style={{width:'120px'}}/>
             </a>
@@ -622,3 +633,5 @@ export default function Layout({children}) {
     </div>
   )
 }
+
+

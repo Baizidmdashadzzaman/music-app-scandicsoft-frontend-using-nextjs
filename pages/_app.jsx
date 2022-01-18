@@ -1,11 +1,24 @@
-import React ,{ useEffect } from 'react'
+import React ,{ useEffect , useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Playlist from '../lib/Playlist'
 function MyApp({ Component, pageProps }) {
+  
+  const [siteinfo, setsiteinfo] = useState("")
+  useEffect(() => {
+   fetch('http://127.0.0.1:8000/api/setting', {
+   method: 'GET',
+   headers: {
+     'Content-Type': 'application/json',
+   },
+  })
+ .then(response => response.json())
+ .then(data => setsiteinfo(data.allData));
+  
+ }, []);
   return (
-    <Layout>
+    <Layout siteinfo={siteinfo}>
        <Playlist/>
-       <Component {...pageProps} />
+       <Component siteinfo={siteinfo} {...pageProps} />
     </Layout>
   )
   

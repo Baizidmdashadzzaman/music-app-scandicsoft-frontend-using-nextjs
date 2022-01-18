@@ -62,7 +62,7 @@ export default function Contactus() {
         <div className="form-group">
           <label>Your Phone *</label>
           <input type="text" id="contactus_phone" name="contactus_phone" 
-           autoComplete="contactus_phone"placeholder="Enter your email" 
+           autoComplete="contactus_phone"placeholder="Enter your phone" 
            className="form-control" required />
         </div>
         <div className="form-group">
