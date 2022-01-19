@@ -6,7 +6,7 @@ import
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Subscribe from './subscribe'
 
-export default function Layout({children , siteinfo}) {
+function Layout({children , siteinfo }) {
  
   return (
     <div >
@@ -634,4 +634,6 @@ export default function Layout({children , siteinfo}) {
   )
 }
 
+
+export default Layout
 

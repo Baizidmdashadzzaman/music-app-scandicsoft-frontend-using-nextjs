@@ -1,28 +1,48 @@
 import Head from 'next/head'
-// import Slider from '@madzadev/image-slider';
-// import "@madzadev/image-slider/dist/index.css";
-export default function Home({siteinfo}) {
-  // const images = [
-  //   {url: 'https://picsum.photos/seed/a/1600/900'},
-  //   {url: 'https://picsum.photos/seed/b/1920/1080'},
-  //   {url: 'https://picsum.photos/seed/c/1366/768'}
-  // ]
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+function Home({siteinfo ,data}) {
+  const images = [
+    {url: 'https://picsum.photos/seed/a/1600/900'},
+    {url: 'https://picsum.photos/seed/b/1920/1080'},
+    {url: 'https://picsum.photos/seed/c/1366/768'}
+  ]
   return (
     <>
       <Head>
         <title>Musicapp : Home</title>
       </Head>
-      
-      {/* <Slider 
-        imageList={images}  
-        loop={true}
-        autoPlay={true}
-        autoPlayInterval={3000} 
-        showArrowControls={false}
-        showDotControls={false}
-        width={1200} height={300} /> */}
+        <br/>
+        <Carousel showArrows={true} infiniteLoop={true} autoPlay={true}>
+        {
+          data.allData.map((singledataimages) => (
+            <div className="ms-banner">
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-lg-12 col-md-12">
+                  <div className="ms_banner_img " style={{paddingTop:'100px'}}>
+                    <img src={ "http://127.0.0.1:8000/settingfolder/" + siteinfo.site_logo_second } 
+                    className="img-fluid" style={{width:'70%'}} />
+                  </div>
+                  <div className="ms_banner_text">
+                    <h1>This Month’s</h1>
+                    <h1 className="ms_color">Record Breaking Albums !</h1>
+                    <p>Dream your moments, Until I Met You, Gimme Some Courage, Dark Alley, One More Of A Stranger, Endless<br /> Things, The Heartbeat Stops, Walking Promises, Desired Games and many more...</p>
+                    <div className="ms_banner_btn">
+                      <a href="#" className="ms_btn">Listen Now</a>
+                      <a href="#" className="ms_btn">Add To Queue</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          ))
+       }
+                  
+        </Carousel>            
           {/*-Banner-*/}
-          <div className="ms-banner">
+          {/* <div className="ms-banner">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-12 col-md-12">
@@ -42,7 +62,7 @@ export default function Home({siteinfo}) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/*-Recently Played Music-*/}
       <div className="ms_top_artist">
   <div className="container-fluid">
@@ -1184,3 +1204,12 @@ export default function Home({siteinfo}) {
     </>
   )
 }
+
+export async function getServerSideProps() {
+  const res = await fetch(process.env.siteurl+`/api/front-slider`)
+  const data = await res.json()
+  return { props: { data } }
+}
+
+
+export default Home

@@ -2,7 +2,7 @@ import React ,{ useEffect , useState } from 'react'
 import Layout from '../components/layout/Layout'
 import Playlist from '../lib/Playlist'
 function MyApp({ Component, pageProps }) {
-  
+   
   const [siteinfo, setsiteinfo] = useState("")
   useEffect(() => {
    fetch('http://127.0.0.1:8000/api/setting', {
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   
  }, []);
   return (
-    <Layout siteinfo={siteinfo}>
+    <Layout siteinfo={siteinfo} >
        <Playlist/>
        <Component siteinfo={siteinfo} {...pageProps} />
     </Layout>
@@ -24,5 +24,6 @@ function MyApp({ Component, pageProps }) {
   
   
 }
+
 
 export default MyApp
