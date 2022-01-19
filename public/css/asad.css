@@ -13,9 +13,8 @@ body {
     width: auto;
     padding: 0px 22px;
     margin-left: 0px;
-  }
-
-  .textviewashtm{
+}
+.textviewashtm{
      border: medium none;
      overflow: hidden;
      width: 100%; 
@@ -23,4 +22,19 @@ body {
      line-height: 1.9; 
      height: 100%;
      font-size: 15px;
-  }
+}
+.ms_player_close {
+    position: absolute;
+    top: -26px;
+    right: 8px;
+    background-color: #3bc8e7;
+    width: 55px;
+    height: 27px;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    line-height: 34px;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 25px 25px 0px 0px;
+}
