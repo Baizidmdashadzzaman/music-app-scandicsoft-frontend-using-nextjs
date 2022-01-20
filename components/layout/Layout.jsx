@@ -5,9 +5,17 @@ import
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Subscribe from './subscribe'
-
+import { useRouter } from 'next/router'
 function Layout({children , siteinfo }) {
- 
+  const router = useRouter()
+  const  searchSongs = (e)=>{
+    if(e.target.value.length > 0) {
+      router.push('/search/' + e.target.value);
+    }
+    else{
+      router.push('/'); 
+    }
+  }
   return (
     <div >
       <div>
@@ -163,7 +171,8 @@ function Layout({children , siteinfo }) {
       <div className="ms_header">
         <div className="ms_top_left">
           <div className="ms_top_search">
-            <input type="text" className="form-control" placeholder="Search Music Here.." />
+            <input type="text" name="search" id="search" onKeyUp={searchSongs} 
+            className="form-control" placeholder="Search Music Here.." />
             <span className="search_icon">
               <img src="/images/svg/search.svg" alt />
             </span>
@@ -182,7 +191,9 @@ function Layout({children , siteinfo }) {
             <a href="javascript:void(0)" className="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
             <a href="javascript:void(0)" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>
           </div>
+          
         </div>
+        
       </div>
 
 
