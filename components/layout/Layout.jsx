@@ -337,14 +337,17 @@ function Layout({children , siteinfo }) {
                   <li><a href="#"><span className="song_optn_icon"><i className="ms_icon icon_share" /></span>Share</a></li>
                 </ul>
               </div>
+
+
               <span className="play-left-arrow"><i className="fa fa-angle-right" aria-hidden="true" /></span>
             </div>
+            
             {/*--Right Queue--*/}
             <div className="jp_queue_wrapper">
-              <span className="que_text" id="myPlaylistQueue"><i className="fa fa-angle-up" aria-hidden="true" /> queue</span>
+              <span className="que_text" id="myPlaylistQueue"><i className="fa fa-angle-up" aria-hidden="true" /> Playlist</span>
               <div id="playlist-wrap" className="jp-playlist">
                 <div className="jp_queue_cls"><i className="fa fa-times" aria-hidden="true" /></div>
-                <h2>queue</h2>
+                <h2>Your playlist</h2>
                 <div className="jp_queue_list_inner">
                   <ul>
                     <li>&nbsp;</li>
@@ -359,6 +362,12 @@ function Layout({children , siteinfo }) {
             <div className="jp-type-playlist">
               <div className="jp-gui jp-interface flex-wrap">
                 <div className="jp-controls flex-item">
+
+{/* <audio controls autoPlay >
+  <source src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3" type="audio/ogg" />
+  <source src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio> */}
                   <button className="jp-previous" tabIndex={0}>
                     <i className="ms_play_control" />
                   </button>
