@@ -20,7 +20,7 @@ function Album({data}) {
         data.allData.map((singledata) => (
 
           <div className="col-lg-2 col-md-6">
-          <Link href={"/album/" + singledata.id} >
+          <Link key={singledata.id} href={"/album/" + singledata.id} >
             <a>
             <div className="ms_rcnt_box marger_bottom30">
             <div className="ms_rcnt_box_img">
@@ -36,6 +36,7 @@ function Album({data}) {
               <h3><a href="#">{singledata.album_name}</a></h3>
             </div>
             </div>
+
             </a>
           </Link>
           </div>

@@ -53,7 +53,7 @@ function Albumview({data}) {
       </ul>
       {
         data.allData.map((singledata) => (
-      <ul>
+      <ul key={singledata.id}>
         <li>
         <Link href={"/songs/" + singledata.id} >
             <a ><span className="play_no">{sl+1}</span><span className="play_hover" /></a>
@@ -71,7 +71,7 @@ function Albumview({data}) {
         </li>
         <li className="text-center"><a >{singledata.song_rating}</a></li>
         <li className="text-center"><a ><span className="ms_icon1 ms_fav_icon" /></a></li>
-        <li className="text-center ms_more_icon"><a href="javascript:;"><span className="ms_icon1 ms_active_icon" /></a>
+        <li className="text-center ms_more_icon"><a href="#"><span className="ms_icon1 ms_active_icon" /></a>
           <ul className="more_option">
             <li><a href="#"><span className="opt_icon"><span className="icon icon_fav" /></span>Add To Favourites</a></li>
             <li><a href="#"><span className="opt_icon"><span className="icon icon_queue" /></span>Add To Queue</a></li>

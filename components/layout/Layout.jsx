@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Head from 'next/head'
 import 
 { faBook,faComment,faHeadphones,faHome,faInfoCircle,faList,faMusic,faQuestion,faVolumeUp
 } from '@fortawesome/free-solid-svg-icons'
@@ -16,7 +17,20 @@ function Layout({children , siteinfo }) {
       router.push('/'); 
     }
   }
+  const alertNotAvailable = ()=>{
+    alert('Module not available.');
+  }
   return (
+    <>
+    <Head>
+            <meta charSet="utf-8" />
+            <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+            <meta name="description" content="Music" />
+            <meta name="keywords" content="Music" />
+            <meta name="author" content="baizid.md.ashadzzaman@gmail.com" />
+            <meta name="MobileOptimized" content={320} />
+            <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    </Head>
     <div >
       <div>
   {/*--Main Wrapper Start--*/}
@@ -147,8 +161,8 @@ function Layout({children , siteinfo }) {
               </Link>
             </li>
             <li>
-              <Link href="/privacyandpolicy" title="Privacry & policy">
-               <a title="Privacry & policy">
+              <Link href="/privacyandpolicy" title="Privacry and policy">
+               <a title="Privacry and policy">
                 <span className="nav_icon">
                   <FontAwesomeIcon icon={faBook} size="lg" />
                 </span>
@@ -185,17 +199,19 @@ function Layout({children , siteinfo }) {
         </div>
         <div className="ms_top_right">
           <div className="ms_top_lang">
-            <span data-toggle="modal" data-target="#lang_modal">languages <img src="/images/svg/lang.svg" alt /></span>
+            {/* <span data-toggle="modal" data-target="#lang_modal">languages <img src="/images/svg/lang.svg" alt /></span> */}
+            <span onClick={alertNotAvailable} >languages <img src="/images/svg/lang.svg" alt /></span>
           </div>
           <div className="ms_top_btn">
-            <a href="javascript:void(0)" className="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
-            <a href="javascript:void(0)" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>
+            {/* <a href="#" className="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
+            <a href="#" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a> */}
+            <a href="#" className="ms_btn reg_btn" onClick={alertNotAvailable} ><span>register</span></a>
+            <a href="#" className="ms_btn login_btn"onClick={alertNotAvailable} ><span>login</span></a>
           </div>
           
         </div>
         
       </div>
-
 
       {children }
 
@@ -292,6 +308,7 @@ function Layout({children , siteinfo }) {
         </div>
       </div>
     </div>
+    
     {/*--Audio Player Section--*/}
     <div className="ms_player_wrapper">
       <div className="ms_player_close">
@@ -304,7 +321,7 @@ function Layout({children , siteinfo }) {
             <div className="player_left">
               <div className="ms_play_song">
                 <div className="play_song_name">
-                  <a href="javascript:void(0);" id="playlist-text">
+                  <a href="#" id="playlist-text">
                     <div className="jp-now-playing flex-item">
                       <div className="jp-track-name" />
                       <div className="jp-artist-name" />
@@ -334,8 +351,8 @@ function Layout({children , siteinfo }) {
                   </ul>
                 </div>
                 <div className="jp_queue_btn">
-                  <a href="javascript:void(0)" className="ms_clear" data-toggle="modal" data-target="#clear_modal">clear</a>
-                  <a href="clear_modal.html" className="ms_save" data-toggle="modal" data-target="#save_modal">save</a>
+                  <a href="#" className="ms_clear" data-toggle="modal" data-target="#clear_modal">clear</a>
+                  <a href="#" className="ms_save" data-toggle="modal" data-target="#save_modal">save</a>
                 </div>
               </div>
             </div>
@@ -633,7 +650,7 @@ function Layout({children , siteinfo }) {
             </div>
             <div className="ms_dnt_have">
               <span>Dont't have an account ?</span>
-              <a href="javascript:void(0)" className="hideCurrentModel" data-toggle="modal" data-target="#myModal">Register Now</a>
+              <a href="#" className="hideCurrentModel" data-toggle="modal" data-target="#myModal">Register Now</a>
             </div>
           </div>
         </div>
@@ -642,6 +659,8 @@ function Layout({children , siteinfo }) {
   </div>
 </div>
     </div>
+    </>
+
   )
 }
 

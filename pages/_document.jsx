@@ -11,13 +11,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head >
-            <meta charSet="utf-8" />
-            <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-            <meta name="description" content="Music" />
-            <meta name="keywords" content="Music" />
-            <meta name="author" content="baizid.md.ashadzzaman@gmail.com" />
-            <meta name="MobileOptimized" content={320} />
-            {/*Start Style */}
             <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
             <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
             <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
@@ -28,8 +21,6 @@ class MyDocument extends Document {
             <link rel="stylesheet" type="text/css" href="/css/style.css" />
             <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' />
             <link rel="stylesheet" type="text/css" href="/css/asad.css" />
-            {/* Favicon Link */}
-            <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
         </Head >
         <body>
           <div class="ms_loader">

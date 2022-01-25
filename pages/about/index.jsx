@@ -22,9 +22,9 @@ export default function About({siteinfo}) {
            
           </div>
           <blockquote>
-            <p className="textviewashtm">
+            <pre className="textviewashtm precustom" style={{color:'white'}}>
                {siteinfo.site_description}
-            </p>
+            </pre>
           </blockquote>
             <p className='blog_single_img'>
             <iframe src={siteinfo.site_map} allowfullscreen="allowfullscreen"

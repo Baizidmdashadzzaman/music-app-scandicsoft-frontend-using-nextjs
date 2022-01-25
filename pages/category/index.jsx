@@ -28,7 +28,7 @@ function Category({data}) {
                 <div className="ms_main_overlay">
                 <div className="ms_box_overlay" />
                 <div className="ms_play_icon">
-                  <img src="images/svg/play.svg" alt />
+                  <img src="/images/svg/play.svg" alt />
                 </div>
               </div>
             </div>

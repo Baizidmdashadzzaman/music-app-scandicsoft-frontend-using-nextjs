@@ -22,7 +22,8 @@ function Categoryview({data}) {
         <div className="blog_single_content">
           <h3 className="ms_blog_title">Category : {data.singledata.category_name}</h3>
           <div className="ms_post_meta">
-            <b>Category descripton : </b>{data.singledata.category_description}
+            <b>Category descripton : </b>
+            <pre className="textviewashtm precustom" style={{color:'white'}}>{data.singledata.category_description}</pre>
             <br/><br/>
             <b>Number of songs : </b> {data.allData.length}
           </div>

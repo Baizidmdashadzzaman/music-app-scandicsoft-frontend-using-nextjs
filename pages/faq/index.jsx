@@ -20,9 +20,9 @@ export default function Faq({siteinfo}) {
           <div className="ms_post_meta">
            
           </div>
-          <p className="textviewashtm">
+          <pre className="textviewashtm precustom" style={{color:'white'}}>
                {siteinfo.site_faq}
-          </p>
+          </pre>
           
           <div className="ms_blog_tag foo_sharing">
             <ul>
