@@ -45,4 +45,8 @@ body {
     z-index: 1;
     cursor: pointer;
     border-radius: 25px 25px 0px 0px;
+}  
+.jp-progress-container, .jp-volume-bar-container {
+    height: 30px;
+    padding: 0;
 }

@@ -79,10 +79,9 @@ function MyApp({ Component, pageProps }) {
     }
   };
 
-
   const [siteinfo, setsiteinfo] = useState("")
   useEffect(() => {
-   fetch('http://127.0.0.1:8000/api/front-setting', {
+   fetch(process.env.siteurl+'/api/front-setting', {
    method: 'GET',
    headers: {
      'Content-Type': 'application/json',

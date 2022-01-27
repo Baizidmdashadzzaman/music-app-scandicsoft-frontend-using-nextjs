@@ -1,9 +1,8 @@
 import React ,{useState} from 'react';
 
-function AlertCustom() {
-    const [alertMessage, setalertMessage] = useState('');
-    const alertNotAvailable = ()=>{ setalertMessage('Module not availbale. It will be added soon.'); $('#customAlert').toggle(); };
-    const alertNotAvailableClose = ()=>{ $('#customAlert').hide(); };
+function AlertCustom({alertMessage }) {
+    let alertMessageFunction = ()=>{ $('#customAlert').toggle(); };
+    let alertNotAvailableClose = ()=>{ $('#customAlert').hide(); };
   return (
 
 <div className="ms_clear_modal">

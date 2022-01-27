@@ -1,4 +1,4 @@
-import React ,{ useEffect ,useState} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import 
@@ -8,7 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Subscribe from './subscribe'
 import { useRouter } from 'next/router'
 import { getCookie} from 'cookies-next';
-
+import styles from "../../styles/AudioPlayer.module.css";
+import { BsArrowLeftShort } from "react-icons/bs"
+import { BsArrowRightShort } from "react-icons/bs"
+import { FaPlay } from "react-icons/fa"
+import { FaPause } from "react-icons/fa"
+import { FaRegPlayCircle } from "react-icons/fa"
+import { FaRegPauseCircle } from "react-icons/fa"
 function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
   
   const router = useRouter()
@@ -21,10 +27,86 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
     }
   }
   const [alertMessage, setalertMessage] = useState('');
-  const alertNotAvailable = ()=>{ setalertMessage('Module not availbale. It will be added soon.'); $('#customAlert').toggle(); };
-  const alertNotAvailableClose = ()=>{ $('#customAlert').hide(); };
+  let alertMessageOpen = ()=>{ setalertMessage('Module not availbale. It will be added soon.');  $('#customAlert').toggle(); };
+  let alertNotAvailableClose = ()=>{ $('#customAlert').hide(); };
+
   const clickToRemoveSong = (datacust) =>{ removeSongToMyPlaylist(datacust); };
-  const [isPlaying, setisPlaying] = useState(0);
+  //const [isPlaying, setisPlaying] = useState(0);
+
+    // state
+    const [songUrl, setsongUrl] = useState("https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3");
+
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
+  
+    // references
+    const audioPlayer = useRef();   // reference our audio component
+    const progressBar = useRef();   // reference our progress bar
+    const animationRef = useRef();  // reference the animation
+  
+    useEffect(() => {
+      const seconds = Math.floor(audioPlayer.current.duration);
+      setDuration(seconds);
+      progressBar.current.max = seconds;
+    }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState ,songUrl]);
+  
+    const calculateTime = (secs) => {
+      const minutes = Math.floor(secs / 60);
+      const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(secs % 60);
+      const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${returnedMinutes}:${returnedSeconds}`;
+    }
+  
+    const togglePlayPause = () => {
+      const prevValue = isPlaying;
+      setIsPlaying(!prevValue);
+      if (!prevValue) {
+        audioPlayer.current.play();
+        animationRef.current = requestAnimationFrame(whilePlaying)
+      } else {
+        audioPlayer.current.pause();
+        cancelAnimationFrame(animationRef.current);
+      }
+    }
+  
+    const whilePlaying = () => {
+      progressBar.current.value = audioPlayer.current.currentTime;
+      changePlayerCurrentTime();
+      animationRef.current = requestAnimationFrame(whilePlaying);
+    }
+  
+    const changeRange = () => {
+      audioPlayer.current.currentTime = progressBar.current.value;
+      changePlayerCurrentTime();
+    }
+  
+    const changePlayerCurrentTime = () => {
+      progressBar.current.style.setProperty('--seek-before-width', `${progressBar.current.value / duration * 100}%`)
+      setCurrentTime(progressBar.current.value);
+    }
+  
+    const backThirty = () => {
+      progressBar.current.value = Number(progressBar.current.value - 30);
+      changeRange();
+    }
+  
+    const forwardThirty = () => {
+      progressBar.current.value = Number(progressBar.current.value + 30);
+      changeRange();
+    }
+    const updateMySong =() =>{
+      setIsPlaying(false);
+      setsongUrl("http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3");
+      updateMySongRest();
+    }
+    const updateMySongRest =() =>{
+      audioPlayer.current.play();
+      animationRef.current = requestAnimationFrame(whilePlaying)
+      togglePlayPause();
+      changeRange();
+    }
   return (
     <>
     <Head>
@@ -198,20 +280,20 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
           </div>
           <div className="ms_top_trend">
             <span><a href="#" className="ms_color">Trending Songs :
-            </a></span> <span className="top_marquee"><a href="#">
+            </a></span> <span className="top_marquee"><a href="#" onClick={updateMySong}>
               Dream your moments, Until I Met You, Gimme Some Courage, Dark Alley (+8 More)</a></span>
           </div>
         </div>
         <div className="ms_top_right">
           <div className="ms_top_lang">
             {/* <span data-toggle="modal" data-target="#lang_modal">languages <img src="/images/svg/lang.svg" alt /></span> */}
-            <span onClick={alertNotAvailable} >languages <img src="/images/svg/lang.svg" alt /></span>
+            <span onClick={alertMessageOpen} >languages <img src="/images/svg/lang.svg" alt /></span>
           </div>
           <div className="ms_top_btn">
             {/* <a href="#" className="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
             <a href="#" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a> */}
-            <a href="#" className="ms_btn reg_btn" onClick={alertNotAvailable} ><span>register</span></a>
-            <a href="#" className="ms_btn login_btn"onClick={alertNotAvailable} ><span>login</span></a>
+            <a href="#" className="ms_btn reg_btn" onClick={alertMessageOpen} ><span>register</span></a>
+            <a href="#" className="ms_btn login_btn"onClick={alertMessageOpen} ><span>login</span></a>
           </div>
           
         </div>
@@ -315,6 +397,8 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
     </div>
     
     {/*--Audio Player Section--*/}
+    <audio ref={audioPlayer} src={songUrl} preload="metadata"></audio>
+
     <div className="ms_player_wrapper">
       <div className="ms_player_close">
         <i className="fa fa-angle-up" aria-hidden="true" />
@@ -412,16 +496,11 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
               <div className="jp-gui jp-interface flex-wrap">
                 <div className="jp-controls flex-item">
 
-{/* <audio controls autoPlay >
-  <source src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3" type="audio/ogg" />
-  <source src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3" type="audio/mpeg" />
-  Your browser does not support the audio element.
-</audio> */}
                   <button className="jp-previous" tabIndex={0}>
                     <i className="ms_play_control" />
                   </button>
-                  <button className="jp-play" tabIndex={0}>
-                    <i className="ms_play_control" />
+                  <button onClick={togglePlayPause} className="jp-play" tabIndex={0}>
+                      {isPlaying ? <FaRegPauseCircle style={{fontSize:'30px',color:'white'}} /> : <FaRegPlayCircle style={{fontSize:'30px',color:'white'}} />}
                   </button>
                   <button className="jp-next" tabIndex={0}>
                     <i className="ms_play_control" />
@@ -429,13 +508,15 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
                 </div>
                 <div className="jp-progress-container flex-item">
                   <div className="jp-time-holder">
-                    <span className="jp-current-time" role="timer" aria-label="time">&nbsp;</span>
-                    <span className="jp-duration" role="timer" aria-label="duration">&nbsp;</span>
+                    <span className="jp-current-time" role="timer" aria-label="time">{calculateTime(currentTime)}</span>
+                    <span className="jp-duration" role="timer" aria-label="duration">{(duration && !isNaN(duration)) && calculateTime(duration)}</span>
                   </div>
-                  <div className="jp-progress">
-                    <div className="jp-seek-bar">
-                      <div className="jp-play-bar">
-                        <div className="bullet">
+                  <div className="">
+                    <div className="">
+                      <div className="">
+                        <div className="">
+                          {/* current time */}
+                         <input type="range" className={styles.progressBar} defaultValue="0" ref={progressBar} onChange={changeRange} />
                         </div>
                       </div>
                     </div>
@@ -718,11 +799,13 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
     </div>
   </div>
 
-  {/*--Queue Clear Model --*/}
+
+  {/* <AlertCustom alertMessage={alertMessage} ref={datarefff} /> */}
+
   <div className="ms_clear_modal">
     <div id="customAlert" className="modal  centered-modal" role="dialog">
       <div className="modal-dialog">
-        {/* Modal content*/}
+        
         <div className="modal-content">
           <button type="button" className="close" onClick={alertNotAvailableClose}>
             <i className="fa_icon form_close" />
@@ -737,7 +820,7 @@ function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
       </div>
     </div>
   </div>
-  {/*--Queue Save Modal--*/}
+
 
 
 </div>
