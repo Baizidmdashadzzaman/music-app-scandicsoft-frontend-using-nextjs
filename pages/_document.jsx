@@ -6,6 +6,7 @@ class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
+  
 
   render() {
     return (
@@ -35,8 +36,8 @@ class MyDocument extends Document {
             <script type="text/javascript" src="/js/plugins/swiper/js/swiper.min.js"></script>
             {/* <script type="text/javascript" src="/js/plugins/player/jplayer.playlist.min.js"></script>
             <script type="text/javascript" src="/js/plugins/player/jquery.jplayer.min.js"></script>
-            <script type="text/javascript" src="/js/plugins/player/audio-player.js"></script>
-            <script type="text/javascript" src="/js/plugins/player/volume.js"></script> */}
+            <script type="text/javascript" src="/js/plugins/player/audio-player.js"></script> */}
+            <script type="text/javascript" src="/js/plugins/player/volume.js"></script>
             <script type="text/javascript" src="/js/plugins/nice_select/jquery.nice-select.min.js"></script>
 	          <script type="text/javascript" src="/js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
             <script type="text/javascript" src="/js/custom.js"></script>

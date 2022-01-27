@@ -3,10 +3,14 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import ReactHtmlParser from 'react-html-parser';
-function Songview({data}) {
+
+function Songview({data ,addSongToMyPlaylist}) {
     const router = useRouter()
     const pid = router.query.id
     const sl = 0;
+    let clickToAddSong=()=>{
+      addSongToMyPlaylist(data.singledata.id);
+    }
     return (
         <>
         <Head>
@@ -26,8 +30,10 @@ function Songview({data}) {
         <a href="#" className="album_date">Album : {data.songAlbum == null ? ('Not specified'):(data.songAlbum.album_name)} </a>
       </div>
       <div className="album_btn">
-        <a href="#" className="ms_btn play_btn"><span className="play_all"><img src="/images/svg/play_all.svg" alt />Play song</span><span className="pause_all"><img src="/images/svg/pause_all.svg" alt />Pause</span></a>
-        <a href="#" className="ms_btn"><span className="play_all"><img src="/images/svg/add_q.svg" alt />Add To Queue</span></a>
+        <a href="#"  className="ms_btn play_btn"><span className="play_all"><img src="/images/svg/play_all.svg" alt />Play song</span><span className="pause_all"><img src="/images/svg/pause_all.svg" alt />Pause</span></a>
+        <a onClick={clickToAddSong} href="javascript:void(0);" className="ms_btn">
+          <span className="play_all"><img src="/images/svg/add_q.svg" alt />Add to playlist</span>
+        </a>
       </div>
       <div className="album_feature" style={{paddingTop:'20px'}}>
         <a href="#" className="album_date">Share on :</a>

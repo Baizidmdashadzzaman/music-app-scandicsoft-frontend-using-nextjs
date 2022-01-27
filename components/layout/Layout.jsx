@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{ useEffect ,useState} from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import 
@@ -7,7 +7,10 @@ import
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Subscribe from './subscribe'
 import { useRouter } from 'next/router'
-function Layout({children , siteinfo }) {
+import { getCookie} from 'cookies-next';
+
+function Layout({children , siteinfo ,myplaylists ,removeSongToMyPlaylist}) {
+  
   const router = useRouter()
   const  searchSongs = (e)=>{
     if(e.target.value.length > 0) {
@@ -17,9 +20,11 @@ function Layout({children , siteinfo }) {
       router.push('/'); 
     }
   }
-  const alertNotAvailable = ()=>{
-    alert('Module not available.');
-  }
+  const [alertMessage, setalertMessage] = useState('');
+  const alertNotAvailable = ()=>{ setalertMessage('Module not availbale. It will be added soon.'); $('#customAlert').toggle(); };
+  const alertNotAvailableClose = ()=>{ $('#customAlert').hide(); };
+  const clickToRemoveSong = (datacust) =>{ removeSongToMyPlaylist(datacust); };
+  const [isPlaying, setisPlaying] = useState(0);
   return (
     <>
     <Head>
@@ -322,10 +327,35 @@ function Layout({children , siteinfo }) {
               <div className="ms_play_song">
                 <div className="play_song_name">
                   <a href="#" id="playlist-text">
-                    <div className="jp-now-playing flex-item">
-                      <div className="jp-track-name" />
-                      <div className="jp-artist-name" />
-                    </div>
+                  
+                  <div className="jp-now-playing flex-item">
+                    
+                      {
+                         isPlaying == 0 ? 
+                         (
+                          <div className="jp-track-name">
+                             <span className="que_img">
+                                <img src="/images/loader.gif" style={{width:'50px'}}/>
+                             </span>
+                            <div className="que_data">Nothing playing 
+                              <div className="jp-artist-name">click play to play
+                              </div>
+                            </div>
+                          </div>
+                         ):(
+                          <div className="jp-track-name">
+                              <span className="que_img">
+                                <img src="/images/weekly/song1.jpg" style={{width:'50px'}}/>
+                              </span>
+                            <div className="que_data">Cro Magnon Man 
+                              <div className="jp-artist-name">Mushroom Records
+                              </div>
+                            </div>
+                          </div>
+                         )
+                      }
+                    
+                  </div>
                   </a>
                 </div>
               </div>
@@ -347,10 +377,29 @@ function Layout({children , siteinfo }) {
               <span className="que_text" id="myPlaylistQueue"><i className="fa fa-angle-up" aria-hidden="true" /> Playlist</span>
               <div id="playlist-wrap" className="jp-playlist">
                 <div className="jp_queue_cls"><i className="fa fa-times" aria-hidden="true" /></div>
-                <h2>Your playlist</h2>
-                <div className="jp_queue_list_inner">
+                <h2>Your playlist ({myplaylists.length})</h2>
+                <div className="jp_queue_list_inner">                 
                   <ul>
-                    <li>&nbsp;</li>
+                    {myplaylists.map((singleplaylist)=>(
+                      // <li className="jp-playlist-current">
+                      <li >
+                       <div>
+                           <a href="#" className="jp-playlist-item-remove" style={{display: 'none'}}>×</a>
+                            <Link href={"/songs/" + singleplaylist.song_id}>
+                            <a href="#" className="jp-playlist-item jp-playlist-current" tabIndex={0}>
+                              <span className="que_img">
+                             <img src={ process.env.siteurl + "/songimages/" + singleplaylist.song_thumbnail } style={{width:'60px'}}/></span><div className="que_data">{singleplaylist.song_name} <span className="jp-artist">by NUN</span></div>
+                            </a>
+                            </Link>
+                             <div className="action"><span className="que_more"><img src="/images/svg/more.svg" /></span>
+                             <span key={singleplaylist.song_id} onClick={() => clickToRemoveSong(singleplaylist.song_id)} className="que_close"><img src="/images/svg/close.svg" /></span>
+                             </div>
+                       </div>
+                       <ul className="more_option">
+                           <li className="jp-playlist-current"><a href="#"><span className="opt_icon" title="Add To Favourites"><span className="icon icon_fav" /></span></a></li><li><a href="#"><span className="opt_icon" title="Add To Queue"><span className="icon icon_queue" /></span></a></li><li><a href="#"><span className="opt_icon" title="Download Now"><span className="icon icon_dwn" /></span></a></li><li><a href="#"><span className="opt_icon" title="Add To Playlist"><span className="icon icon_playlst" /></span></a></li><li><a href="#"><span className="opt_icon" title="Share"><span className="icon icon_share" /></span></a></li>
+                       </ul>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div className="jp_queue_btn">
@@ -429,6 +478,8 @@ function Layout({children , siteinfo }) {
       </div>
       {/*main div*/}
     </div>
+    
+
   </div>
   {/*--Register Modal Start--*/}
   {/* Modal */}
@@ -666,6 +717,29 @@ function Layout({children , siteinfo }) {
       </div>
     </div>
   </div>
+
+  {/*--Queue Clear Model --*/}
+  <div className="ms_clear_modal">
+    <div id="customAlert" className="modal  centered-modal" role="dialog">
+      <div className="modal-dialog">
+        {/* Modal content*/}
+        <div className="modal-content">
+          <button type="button" className="close" onClick={alertNotAvailableClose}>
+            <i className="fa_icon form_close" />
+          </button>
+          <div className="modal-body">
+            <h1>{alertMessage}</h1>
+            <div className="clr_modal_btn">
+               <a href="#" onClick={alertNotAvailableClose} >close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {/*--Queue Save Modal--*/}
+
+
 </div>
     </div>
     </>
